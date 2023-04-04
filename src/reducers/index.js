@@ -1,22 +1,31 @@
-import { ACTION_ONE, ACTION_TWO } from '../actions/index.js';
+import { FETCH_DOGS_START, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAIL } from '../actions/index.js';
 
 const initialState = {
-    items: [],
-    title: "Initial App Construction",
-    note: "",
+    dogs: [],
+    note: "Inactive",
+    isFetching: false,
 }
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case ACTION_ONE:
-          return {
-          ...state,
-          note: "Action One!!!"
-          };
-        case ACTION_TWO:
+        case FETCH_DOGS_START:
           return {
             ...state,
-            note: "Action Two!!!"
+            note: "Start!!!",
+            isFetching: true,
+          };
+        case FETCH_DOGS_SUCCESS:
+          return {
+            ...state,
+            dogs: action.payload,
+            note: "Success!!!",
+            isFetching: false,
+          };
+        case FETCH_DOGS_FAIL:
+          return {
+            ...state,
+            note: "Failure!!!",
+            isFetching: false,
           };
         default:
           return state;

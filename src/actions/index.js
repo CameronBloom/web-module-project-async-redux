@@ -1,10 +1,15 @@
-export const ACTION_ONE = "ACTION_ONE";
-export const ACTION_TWO = "ACTION_TWO";
+import axios from 'axios';
 
-export const actionOne = () => {
-    return({ type: ACTION_ONE, payload: '' });
-}
+export const FETCH_DOGS_START = "FETCH_DOGS_START";
+export const FETCH_DOGS_SUCCESS = "FETCH_DOGS_SUCCESS";
+export const FETCH_DOGS_FAIL = "FETCH_DOGS_FAIL";
 
-export const actionTwo = () => {
-    return({ type: ACTION_TWO, payload: '' });
-}
+export const getDogs = () => dispatch => {
+    dispatch({ type: FETCH_DOGS_START });
+    
+    axios.get('https://dog.ceo/api/breed/hound/images')
+    .then(res =>
+      dispatch({ type: FETCH_DOGS_SUCCESS, payload: res.data.message.slice(0, 5) })
+    )
+    .catch(err => dispatch({ type: FETCH_DOGS_FAIL, payload: err }));
+};
