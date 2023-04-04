@@ -18,7 +18,9 @@ const App = props => {
       
       <div>
         {props.dogs.map((dog, idx) => (
-          <div key={idx}>{dog}</div>
+          <div className="dog-container" key={idx}>
+            <img src={dog} alt={`dog number ${idx}`}></img>
+          </div>
         ))}
       </div>
       
